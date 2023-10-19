@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1025234718305",
+    "project_id": "todolistproject-cc264",
+    "storage_bucket": "todolistproject-cc264.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025234718305:android:987eec94a9d404a768e420",
+        "android_client_info": {
+          "package_name": "com.example.rdhomework25firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025234718305-h8marfr48op2sdvfnvcqeb5n1a8t1i5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rdhomework25firebase",
+            "certificate_hash": "7d31c4330eb3c391aa90b0a8644dc9734d3513f4"
+          }
+        },
+        {
+          "client_id": "1025234718305-vqb04ib87qhdcg23jnqi7jpjqe7ee3k8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBInAuFGlrEE2kdmHbZlcb8E3Jv1OSN2b4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025234718305-vqb04ib87qhdcg23jnqi7jpjqe7ee3k8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
