@@ -8,43 +8,58 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 
-class SplashFragment: Fragment() {
-
+class SplashFragment : Fragment() {
     private val animatorSet = AnimatorSet()
-    private var singInButton: SignInButton? = null
+    private var signInButton: SignInButton? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.splash_login_screen,container,false)
+        return inflater.inflate(R.layout.splash_login_screen, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        singInButton = view.findViewById(R.id.sing_in_button)
-        val image: ImageView = view.findViewById(R.id.login_screen_image)
+        signInButton = view.findViewById(R.id.signInButton)
+        val image: ImageView = view.findViewById(R.id.image)
         startAnimation(image)
-
+        val googleSignInInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("1025234718305-vqb04ib87qhdcg23jnqi7jpjqe7ee3k8.apps.googleusercontent.com")
+                .requestEmail()
+                .build()
+        val googleSignInClient =
+            GoogleSignIn.getClient(requireContext(), googleSignInInOptions)
+        val account = GoogleSignIn.getLastSignedInAccount(requireContext())
+        val activity = requireActivity() as OnAuthenticationLaunch
+        if(account == null) {
+            showSignInButton()
+        } else {
+            activity.showListFragment()
+        }
+        signInButton?.setOnClickListener {
+            activity.launch(googleSignInClient.signInIntent)
+        }
     }
-
-    private fun startAnimation(image: ImageView){
-        val scaleXAnimation = ObjectAnimator.ofFloat(image, View.SCALE_X, 0.5F, 1F)
+    private fun showSignInButton(){
+        signInButton?.visibility = View.VISIBLE
+        animatorSet.cancel()
+    }
+    private fun startAnimation(image: ImageView) {
+        val scaleXAnimation = ObjectAnimator.ofFloat(image, View.SCALE_X,
+            0.5f, 1f)
         scaleXAnimation.repeatMode = ObjectAnimator.REVERSE
         scaleXAnimation.repeatCount = ObjectAnimator.INFINITE
-        val scaleYAnimation = ObjectAnimator.ofFloat(image, View.SCALE_Y, 0.5F, 1F)
+        val scaleYAnimation = ObjectAnimator.ofFloat(image, View.SCALE_Y,
+            0.5f, 1f)
         scaleYAnimation.repeatMode = ObjectAnimator.REVERSE
         scaleYAnimation.repeatCount = ObjectAnimator.INFINITE
-        animatorSet.playTogether(scaleXAnimation,scaleYAnimation)
+        animatorSet.playTogether(scaleXAnimation, scaleYAnimation)
         animatorSet.duration = 1000
         animatorSet.start()
     }
-    private fun showSingInButton(){
-        singInButton?.visibility = View.VISIBLE
-        animatorSet.cancel()
-    }
-
 }
